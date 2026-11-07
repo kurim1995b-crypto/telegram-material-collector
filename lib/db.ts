@@ -7,7 +7,7 @@ function getSql() {
 }
 
 // Create the Neon client lazily so Vercel can build the app before env vars are added.
-export function sql(strings: TemplateStringsArray, ...values: unknown[]) {
+export function sql(strings: TemplateStringsArray, ...values: any[]) {
   return getSql()(strings, ...values);
 }
 
