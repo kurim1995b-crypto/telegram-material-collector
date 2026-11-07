@@ -1,0 +1,21 @@
+name: Build check
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm install
+      - run: npx tsc --noEmit
+      - run: npm run build
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/placeholder
+          TELEGRAM_BOT_TOKEN: "000000:placeholder"
+          TELEGRAM_WEBHOOK_SECRET: "placeholder-secret-token"
